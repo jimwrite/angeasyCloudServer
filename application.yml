@@ -1,0 +1,22 @@
+spring:                 #打包配置
+  profiles: 
+    active:
+      - dev
+
+---
+spring:    
+  profiles: dev
+  application:
+    name: cloudserver-config-dev
+
+---
+spring: 
+  profiles: default   
+  application:
+    name: cloudserver-config-default
+ 
+
+   
+  
+      
+      
