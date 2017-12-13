@@ -1,0 +1,103 @@
+spring:                 #打包配置
+  profiles: 
+    active:
+      - dev
+
+---
+server:
+  port: 9501
+spring:
+  profiles: beta9501
+  application:
+    name: cloudServer-zuul-gateway   #配置eureka服务上的挂载id名，该配置需要进入配置管理流程严格控制
+security:
+  basic:
+    enabled: true
+  user:
+    name: hcr
+    password: hcr9501
+  
+eureka:       #客户端连接注册的配置
+  client:
+    service-url:
+    #单台注册可以多台传递，建议多台注册HA安全保证提高可靠性
+      defaultZone: http://hcr:hcr12356@192.168.1.134:7001/eureka,http://hcr:hcr12356@192.168.1.134:7002/eureka
+  instance:
+#    lease-renewal-interval-in-seconds: 2 #设置心跳间隔时间（默认30）
+#    lease-expiration-duration-in-seconds: 5 #Server应该收到心跳数据的间隔周期（默认90秒）
+    instance-id: 192.168.1.134:9501     #配置显示地址信息
+    prefer-ip-address: true           #以真实地址显示服务ip信息
+
+#info信息,进入配置管理，便于维护
+info:
+  app.name: cloudServer
+  company.name: angeasy
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+    
+zuul:                ##路由配置
+  prefix: /angeasy    #请求方设置，可无视
+  ignored-services:   ##屏蔽ServerID直接访问,单个或少数
+#    cloudserver-provider-faceserver
+    "*"              ##屏蔽所有，所有serverid的访问都需要配置映射
+  routes:
+    cloudserver-provider-faceserver: /face-channel/**
+    cloudserver-provider-duty: /duty-server/**
+#    faceserver.path:  /face-channel/**
+#    faceserver.serviceId: cloudserver-provider-faceserver
+
+
+    
+---
+server:
+  port: 9502
+spring:
+  profiles: beta9502
+  application:
+    name: cloudServer-zuul-gateway   #配置eureka服务上的挂载id名，该配置需要进入配置管理流程严格控制
+
+security:
+  basic:
+    enabled: true
+  user:
+    name: hcr
+    password: hcr9501
+  
+eureka:       #客户端连接注册的配置
+  client:
+    service-url:
+    #单台注册可以多台传递，建议多台注册HA安全保证提高可靠性
+      defaultZone: http://hcr:hcr12356@192.168.1.134:7001/eureka,http://hcr:hcr12356@192.168.1.134:7002/eureka
+  instance:
+#    lease-renewal-interval-in-seconds: 2 #设置心跳间隔时间（默认30）
+#    lease-expiration-duration-in-seconds: 5 #Server应该收到心跳数据的间隔周期（默认90秒）
+    instance-id: 192.168.1.134:9502     #配置显示地址信息
+    prefer-ip-address: true           #以真实地址显示服务ip信息
+
+#info信息,进入配置管理，便于维护
+info:
+  app.name: cloudServer
+  company.name: angeasy
+  build.artifactId: $project.artifactId$
+  build.version: $project.version$
+    
+zuul:                ##路由配置
+  prefix: /angeasy    #请求方设置，可无视
+  ignored-services:   ##屏蔽ServerID直接访问,单个或少数
+#    cloudserver-provider-faceserver
+    "*"              ##屏蔽所有，所有serverid的访问都需要配置映射
+  routes:
+    cloudserver-provider-faceserver: /face-channel/**
+    cloudserver-provider-duty: /duty-server/**
+#    faceserver.path:  /face-channel/**
+#    faceserver.serviceId: cloudserver-provider-faceserver
+
+
+
+
+ 
+
+   
+  
+      
+      

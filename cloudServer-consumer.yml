@@ -1,0 +1,43 @@
+spring:                 #打包配置
+  profiles: 
+    active:
+      - dev
+
+---
+server:
+  port: 8084
+spring:
+  profiles: beta8084
+  application:
+    name: cloudServer-consumer   #配置eureka服务上的挂载id名，该配置需要进入配置管理流程严格控制
+logging:
+  level:
+    com.angeasy.service: debug   
+
+ 
+eureka:       #客户端连接注册的配置
+  client:
+    register-with-eureka: false
+    service-url:
+      defaultZone: http://hcr:hcr12356@192.168.1.134:7001/eureka,http://hcr:hcr12356@192.168.1.134:7002/eureka
+#压缩请求
+feign:
+  hystrix:
+    enabled: true
+  compression:
+    request:
+      mime-types:        #压缩类型
+        - text/xml
+        - application/xml
+        - application/json
+      min-request-size: 2048   #压缩超过2k的数据
+
+
+
+
+ 
+
+   
+  
+      
+      
