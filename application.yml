@@ -7,13 +7,23 @@ spring:                 #打包配置
 spring:    
   profiles: dev
   application:
-    name: cloudserver-config-dev
-
+    name: cloudServer-provider-faceServer
+eureka:       #客户端连接注册的配置
+  client:
+    service-url:
+    #单台注册可以多台传递，建议多台注册HA安全保证提高可靠性
+      defaultZone: http://hcr:hcr12356@192.168.1.134:7001/eureka,http://hcr:hcr12356@192.168.1.134:7002/eureka
+ 
 ---
 spring: 
-  profiles: default   
+  profiles: beta   
   application:
-    name: cloudserver-config-default
+    name: cloudServer-provider-faceServer
+eureka:       #客户端连接注册的配置
+  client:
+    service-url:
+    #单台注册可以多台传递，建议多台注册HA安全保证提高可靠性
+      defaultZone: http://hcr:hcr12356@192.168.1.134:7001/eureka,http://hcr:hcr12356@192.168.1.134:7002/eureka
  
 
    
