@@ -1,0 +1,68 @@
+spring:                 #打包配置
+  profiles: 
+    active:
+      - dev
+
+---
+server:
+  port: 7002
+spring:    
+  profiles: beta7002
+  application:
+    name: cloudServer-eureka
+eureka:
+  instance:             #定义Eureka实例
+    hostname: peer7002
+  client:   
+    service-url:
+      defaultZone: http://hcr:hcr12356@192.168.1.134:7001/eureka                          
+    #屏蔽了自动注册，防止EurekaServer把自己当客户端注册
+    fetch-registry: false             #是否取得注册信息(配置false)
+    register-with-eureka: false       #配置服务注册中心是否以自己为客户端进行注册(配置false)
+#  server:
+#    enable-self-preservation: false  #关闭开启保护模式
+#    eviction-interval-timer-in-ms: 60000    #定时刷新服务时间，越长越好最好别改
+
+security:
+  basic: 
+    enabled: true
+  sessions: stateless   
+  user:           #授权角色
+   name: hcr
+   password: hcr12356 
+
+---
+server:
+  port: 7001
+spring:    
+  profiles: beta7001
+  application:
+    name: cloudServer-eureka
+eureka:
+  instance:             #定义Eureka实例
+    hostname: peer7001
+  client:   
+    service-url:
+      defaultZone: http://hcr:hcr12356@192.168.1.134:7002/eureka                          
+    #屏蔽了自动注册，防止EurekaServer把自己当客户端注册
+    fetch-registry: false             #是否取得注册信息(配置false)
+    register-with-eureka: false       #配置服务注册中心是否以自己为客户端进行注册(配置false)
+#  server:
+#    enable-self-preservation: false  #关闭开启保护模式
+#    eviction-interval-timer-in-ms: 60000    #定时刷新服务时间，越长越好最好别改
+
+security:
+  basic: 
+    enabled: true
+  sessions: stateless   
+  user:           #授权角色
+   name: hcr
+   password: hcr12356 
+
+
+ 
+
+   
+  
+      
+      
